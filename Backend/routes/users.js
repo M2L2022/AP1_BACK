@@ -13,6 +13,6 @@ router.route('/users/:id')
 // identification ------------------------------------------------------------------------------------------------------------------------------------
 
 router.route('/identification')
-    .get(identificationUser);
+    .post(identificationUser);
 
 module.exports = router;
