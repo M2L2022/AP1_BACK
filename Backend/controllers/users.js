@@ -40,6 +40,9 @@ module.exports = {
     try {
       connexion = await pool.getConnection();
       const result = await connexion.query('CALL identificationUser (?, ?)', [email, password]);
+      const data = result [0][0]; // rajout
+      req.session.uid = data.ID_UTILISATEUR; // rajout
+      console.log(req.session);
     if (!result[0].length) {
       res.status(401).json({ error: "Identifiant Invalide" });
     }
@@ -49,5 +52,30 @@ module.exports = {
   } finally {
     if (connexion) connexion.end();
   }
+},
+
+// rajout
+checkLoginStatus: async (req, res) => {
+  const { uid } = req.session;
+  if (uid) {
+    return res.status(200).json({ success: { uid } });
+  }
+  return res.status(403).send();
+},
+
+checkSession: async (req, res, next) => {
+  const {uid } = req.session;
+  if (uid) {
+    return next();
+  }
+  return res.status(403).send();
+},
+
+logout: (req, res) => {
+  if (req?.session?.uid) {
+    req.session.destroy();
+    return res.status(200).send()
+  }
+  return res.status(401).send()
 },
 };

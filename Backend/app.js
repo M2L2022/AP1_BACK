@@ -1,11 +1,22 @@
 require("dotenv").config({ path: `./config/${process.env.NODE_ENV}.env` });
 
 const express = require("express");
+const session = require("express-session"); // rajout
 
 const app = express();
 
 const cors = require("cors");
-app.use(cors());
+app.use(cors({
+  origin: process.env.ORIGIN,
+  credentials: true
+}));
+
+app.use(session({ // rajout
+  secret: process.env.SESSION_PASSWORD,
+  saveUninitialized: false,
+  resave: false,
+  cookie: { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 }
+}));
 
 app.use(express.json());
 
