@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Yuyu1403/PPE3_back.git" 
+    "url": "git+https://github.com/Yuyu1403/PPE3_back.git"
   },
   "author": "Nordine Khoudou, Younes Yousfi, Xavier Truong, Yasim Kebli",
   "license": "ISC",
@@ -24,6 +24,7 @@
     "dotenv": "^14.3.2",
     "express": "^4.17.2",
     "express-promise-router": "^4.1.1",
+    "express-session": "^1.17.2",
     "mariadb": "^2.5.5",
     "nodemon": "^2.0.15"
   }
