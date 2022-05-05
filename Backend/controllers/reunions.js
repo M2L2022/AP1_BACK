@@ -5,13 +5,13 @@ module.exports = {
   // CREATION D'UNE NOUVELLE REUNION
 
   createReunion: async (req, res) => {
-    const { reunion, date, organisateur, salle, repas } = req.body;
+    const { date, organisateur, salle, repas } = req.body;
     let connexion;
     try {
       connexion = await pool.getConnection();
       const result = await connexion.query(
-        "CALL createReunion (?, ?, ?, ?, ?)",
-        [reunion, date, organisateur, salle, repas]
+        "CALL createReunion (?, ?, ?, ?)",
+        [date, organisateur, salle, repas]
       );
       return res.status(200).json({ success: result });
     } catch (error) {
