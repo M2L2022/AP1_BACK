@@ -9,15 +9,14 @@ DELIMITER //
 -- ainsi que choisir s'il souhaite un repas ou non (application mobile.)
 
 ---- createReunion -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-CREATE OR REPLACE PROCEDURE createReunion (IN p_reunion BIGINT, IN p_date DATE, IN p_organisateur BIGINT, IN p_salle BIGINT, 
+CREATE OR REPLACE PROCEDURE createReunion (IN p_date DATE, IN p_organisateur BIGINT, IN p_salle BIGINT, 
 IN p_repas BIGINT)
 BEGIN
     INSERT INTO `REUNION`(
-    `ID_REUNION` ,
     `DATE_REUNION`,
     `ID_ORGANISATEUR` ,
     `ID_SALLE` ,
-    `ID_REPAS`) VALUES (p_reunion, p_date, p_organisateur, p_salle, p_repas);
+    `ID_REPAS`) VALUES (p_date, p_organisateur, p_salle, p_repas);
 END //
 
 ----- getAllReunions -------------------------------------------------------------------------------------------------------------------------------------------------------------------
