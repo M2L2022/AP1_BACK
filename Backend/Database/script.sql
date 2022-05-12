@@ -75,7 +75,7 @@ CREATE TABLE RESERVATION(
 )ENGINE = INNODB;
 
 INSERT INTO
-   `type_ligue` (`ID_TYPE_LIGUE`, `NOM_LIGUE`)
+   `TYPE_LIGUE` (`ID_TYPE_LIGUE`, `NOM_LIGUE`)
 VALUES
    (1, 'Ligue de Football'),
    (2, 'Ligue de Tennis'),
@@ -85,7 +85,7 @@ VALUES
    (6, 'Ligue de Rugby');
 
 INSERT INTO
-   `utilisateur` (
+   `UTILISATEUR` (
       `ID_UTILISATEUR`,
       `NOM_UTILISATEUR`,
       `PRENOM_UTILISATEUR`,
@@ -187,7 +187,7 @@ VALUES
    );
 
 INSERT INTO
-   `salle` (`ID_SALLE`, `NOM_SALLE`, `CAPACITE_ACCUEIL`)
+   `SALLE` (`ID_SALLE`, `NOM_SALLE`, `CAPACITE_ACCUEIL`)
 VALUES
    (1001, 'Majorelle', 50),
    (1002, 'Gruber', 60),
@@ -196,7 +196,7 @@ VALUES
    (1005, 'Baccarat', 40);
 
 INSERT INTO
-   `parking` (`ID_PLACE_PARKING`, `NUM_PLACE`, `DISPO_PLACE`)
+   `PARKING` (`ID_PLACE_PARKING`, `NUM_PLACE`, `DISPO_PLACE`)
 VALUES
    (2001, 1, 1),
    (2002, 2, 1),
@@ -226,12 +226,12 @@ VALUES
    (2026, 26, 1);
 
 INSERT INTO 
-   `repas` (`ID_REPAS`, `TYPE_REPAS`)
+   `REPAS` (`ID_REPAS`, `TYPE_REPAS`)
    VALUES
    (3001, 'Petit Dejeuner'),
    (3002, 'Collation'),
    (3003, 'Encas');
 INSERT INTO 
-   `administrateur` (`ID_ADMIN`, `MP_ADMIN`)
+   `ADMINISTRATEUR` (`ID_ADMIN`, `MP_ADMIN`)
    VALUES
    (666, 'root');

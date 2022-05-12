@@ -5,7 +5,14 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "cross-env NODE_ENV=dev nodemon index.js"
+    "dev": "cross-env NODE_ENV=dev nodemon app.js",
+    "prod": "cross-env NODE_ENV=prod node app.js",
+    "integrateSchemas": "cross-env mariadb -u root -p < ./Database/script.sql",
+    "integrateProcAdmin": "cross-env mariadb -u root -p < ./Database/proceduresAdmin.sql",
+    "integrateProcReunion": "cross-env mariadb -u root -p < ./Database/proceduresReunion.sql",
+    "integrateProcUsers": "cross-env mariadb -u root -p < ./Database/proceduresUsers.sql",
+    "integratePermissions": "cross-env mariadb -u root -p < ./Database/permissions.sql",
+    "integrateDB": "npm run integrateSchemas && npm run integrateProcAdmin && npm run integrateProcUsers && npm run integratePermissions && npm run integrateProcReunion"
   },
   "repository": {
     "type": "git",
