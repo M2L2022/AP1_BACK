@@ -9,7 +9,7 @@ const { identificationAdmin, insertNewUser, deleteUser, getOneUser, getAllUsers,
 router.route("/login")
     .get(identificationAdmin);
 
-router.route("/:p_utilisateur")
+router.route("/:id")
     .get(getOneUser);
 
 router.route("/:id")

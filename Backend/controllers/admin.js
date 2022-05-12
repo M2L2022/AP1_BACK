@@ -57,12 +57,12 @@ module.exports = {
   },
 
   getOneUser: async (req, res) => {
-    const { p_utilisateur } = req.params;
+    const { id } = req.params;
     let connexion;
     try {
       connexion = await pool.getConnection();
       const result = await connexion.query("CALL getOneUser (?)", [
-        p_utilisateur,
+        id
       ]);
       return res.status(200).json({ success: result });
     } catch (error) {
