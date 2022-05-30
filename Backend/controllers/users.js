@@ -1,4 +1,6 @@
 const pool = require("../config/database");
+const bcrypt = require("bcrypt");
+const { response } = require("express");
 
 module.exports = {
   insertUser: async (req, res) => {
@@ -6,8 +8,9 @@ module.exports = {
     let connexion;
     try {
       connexion = await pool.getConnection();
+      let hashPassword = await bcrypt.hash(password, 12)
       const result = await connexion.query("CALL insertNewUser (?, ?, ?, ?, ?, ?)",
-      [prenom, nom, email, telephone, password, typeLigue]
+      [prenom, nom, email, telephone, hashPassword, typeLigue]
       );
       return res.status(200).json({ success: result });
     } catch (error) {
@@ -40,13 +43,23 @@ module.exports = {
     try {
       connexion = await pool.getConnection();
       const result = await connexion.query('CALL identificationUser (?, ?)', [email, password]);
-      const data = result [0][0]; // rajout
-      req.session.uid = data.ID_UTILISATEUR; // rajout
-      console.log(req.session);
-    if (!result[0].length) {
-      res.status(401).json({ error: "Identifiant Invalide" });
-    }
-    return res.status(200).json({ success: result });
+      const DBpassword = result[0][0].PASSWORD_UTILISATEUR;
+
+      const resultat = await bcrypt.compare(password, DBpassword)
+
+      if (!result[0].length) {
+        return res.status(401).json({ error: "Identifiant Invalide" });
+       }
+
+      if (!resultat){
+        return res.status(400).json("la combinaison est fausse")
+      } else {
+        const data = result [0][0]; // rajout
+        req.session.uid = data.ID_UTILISATEUR; // rajout
+        console.log(req.session);
+        return res.status(200).json("vous êtes identifié")
+      }
+    
   } catch (error) {
     return res.status(400).json({ error: error.message });
   } finally {
@@ -74,6 +87,7 @@ checkSession: async (req, res, next) => {
 logout: (req, res) => {
   if (req?.session?.uid) {
     req.session.destroy();
+    console.log(req.session);
     return res.status(200).send()
   }
   return res.status(401).send()
