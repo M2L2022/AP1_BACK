@@ -52,7 +52,6 @@ module.exports = {
        }
 
       if (!resultat){
-        return res.status(400).json("la combinaison est fausse")
       } else {
         const data = result [0][0]; // rajout
         req.session.uid = data.ID_UTILISATEUR; // rajout
