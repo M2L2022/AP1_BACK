@@ -56,7 +56,7 @@ module.exports = {
         const data = result [0][0]; // rajout
         req.session.uid = data.ID_UTILISATEUR; // rajout
         console.log(req.session);
-        return res.status(200).json("vous êtes identifié")
+        return res.status(200).json({success: {ID_UTILISATEUR: data.ID_UTILISATEUR, MAIL_UTILISATEUR: data.MAIL_UTILISATEUR}})
       }
     
   } catch (error) {

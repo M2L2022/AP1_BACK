@@ -5,13 +5,13 @@ const session = require("express-session"); // rajout
 
 const app = express();
 
-if(process.env.NODE_ENV=="dev"){ // deja gere en prod.
-  const cors = require("cors");
-  app.use(cors({
-    origin: process.env.ORIGIN,
-    credentials: true
-  }));  
-}
+// if(process.env.NODE_ENV=="dev"){ // deja gere en prod.
+//   const cors = require("cors");
+//   app.use(cors({
+//     origin: process.env.ORIGIN,
+//     credentials: true
+//   }));  
+// }
 
 app.use(session({ // rajout
   secret: process.env.SESSION_PASSWORD,
